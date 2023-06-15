@@ -259,18 +259,6 @@ function csv2tf(csv) {
     return tf;
 }
 
-// REMOVE THIS SECTION vvvvv !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// This is just to to prove a fake secondary trace using the first
-// Add the second trace data in the JSArray instead of repeating it 
-
-JSArray[1].magnitude = JSArray[1].magnitude.map((v, i) => round(v - 10, 2));
-JSArray[1].phase = JSArray[1].phase.map((v, i) => round(wrapTo180(v + 30), 2));
-JSArray[1].coherence = JSArray[1].coherence.map((v, i) => round(v * 0.75, 2));
-
-// REMOVE THIS SECTION ^^^^^ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 // Main tranfer function
 // Main trace
 var tf0 = js2tf(JSArray[0]); // Loads data
@@ -278,92 +266,6 @@ var tf0 = js2tf(JSArray[0]); // Loads data
 var tf1 = js2tf(JSArray[1]); // laods data. S
 
 processData();
-
-// --------------------------------------------------------------------------------
-
-// Demo UI
-
-document.getElementById("polarityCheckbox").addEventListener("click", (event) => {
-    INVERT_POLARITY = event.target.checked;
-    processData();
-});
-
-document.getElementById("delayRange").addEventListener("input", (event) => {
-    DELAY_MS = (event.target.value) / 10;
-    processData();
-    updateControls();
-});
-
-document.getElementById("coherenceRange").addEventListener("input", (event) => {
-    COHERENCE_THRESHOLD = event.target.value / 100;
-    processData();
-    updateControls();
-});
-
-
-document.getElementById("resetButton").addEventListener("click", () => {
-    INVERT_POLARITY = false;
-    COHERENCE_THRESHOLD = 0;
-    DELAY_MS = 0;
-    processData();
-    updateControls();
-});
-
-/* Not used
-document.getElementById("csvUrl1Text").value = url1;
-document.getElementById("csvUrl2Text").value = url2;
-
-document.getElementById("setButton").addEventListener("click", () => {
-  tic();
-  const url = document.getElementById("csvUrl1Text").value;
-  parseData(url, doStuff(tf0)); // Aysnc
-});
-
-document.getElementById("addButton").addEventListener("click", () => {
-  tic();
-  const url = document.getElementById("csvUrl2Text").value;
-  parseData(url, doStuff(tf1)); // Aysnc
-});
-
-document.getElementById("removeButton").addEventListener("click", () => {
-  tf1.magnitude = [];
-  tf1.phase = [];
-  tf1.coherence = [];
-  processData();
-  updateControls();
-});
-
-document.getElementById("swapButton").addEventListener("click", () => {
-  [tf0, tf1] = [tf1, tf0];
-  processData();
-  updateControls();
-});
-
-*/
-
-document.getElementById("secondaryButton").addEventListener("click", () => {
-    if (tf1.magnitude.length == 0) {
-        tf0 = js2tf(JSArray[0]);
-        tf1 = js2tf(JSArray[1]);
-    } else {
-        tf1.magnitude = [];
-        tf1.phase = [];
-        tf1.coherence = [];
-    }
-    processData();
-    updateControls();
-});
-
-
-function updateControls() {
-    document.getElementById("polarityCheckbox").checked = INVERT_POLARITY;
-    document.getElementById("delayRange").value = (DELAY_MS * 10);
-    document.getElementById("coherenceRange").value = COHERENCE_THRESHOLD * 100;
-    document.getElementById("delayText").innerHTML = DELAY_MS;
-    document.getElementById("coherenceText").innerHTML = Math.round(COHERENCE_THRESHOLD * 100);
-}
-
-// --------------------------------------------------------------------------------
 
 // Processing
 

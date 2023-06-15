@@ -43,42 +43,6 @@
 <body>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://rawgit.com/mholt/PapaParse/master/papaparse.js"></script>
-
-<!-- UI for  demo -->
-
-<div class="sysfont" style="clear:both;">
-    <div class="text">Delay (ms)</div>
-    <div id="delayText" class="text">0</div>
-    <div class="text">Coherence (%)</div>
-    <div id="coherenceText" class="text">0</div>
-</div>
-
-<div style="clear:both;">
-    <input type="checkbox" id="polarityCheckbox" title="Invert polarity">
-    <label for="polarityCheckbox">Polarity</label>
-    <label for="delayRange">Delay</label>
-    <input type="range" id="delayRange" title="Set delay" min="-200" max="200" value="0">
-    <label for="coherenceRange" title="Set coherence threshold">Coherence</label>
-    <input type="range" id="coherenceRange" min="0" max="100" value="0">
-    <button id="resetButton" title="Reset parameters">Reset</button>
-
-    <button id="secondaryButton" title="Secondary trace">Secondary</button>
-</div>
-<!--
-<div style="clear:both;">
-  <button id="setButton" title="Load main CSV from URL">Main URL</button>
-  <input type="text" id="csvUrl1Text" size="80">
-  <button id="swapButton" title="Swap main and secondary traces">Swap</button>
-</div>
-<div style="clear:both;">
-  <button id="addButton" title="Load secondary CSV from URL">Second URL</button>
-  <input type="text" id="csvUrl2Text" size="80">
-  <button id="removeButton" title="Delete secondary trace">Delete</button>
-</div>
--->
-
-<!-- End of  demo  -->
 
 <div id="graph-container">
 
